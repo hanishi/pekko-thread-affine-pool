@@ -1,0 +1,14 @@
+services:
+  # JIT mode: stage with sbt, run JVM bytecode on a GraalVM JDK so
+  # GraalJS guest code gets JITted by Graal. Fast to rebuild
+  # (~10s once deps are cached), large image (~1 GB).
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: pekko-thread-affine-pool:dev
+    ports:
+      - "8090:8090"
+    environment:
+      HTTP_HOST: "0.0.0.0"
+      HTTP_PORT: "8090"
